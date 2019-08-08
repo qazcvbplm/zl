@@ -1,0 +1,185 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'org.greenrobot.greendao'
+apply plugin: 'mtj-circle-plugin'
+
+MtjCirclePluginConfig {
+    // 设置appkey，必须设置，否则插件使用无效
+    appkey = '0fe5b18f8a'
+    // 设置debug 开关，默认关闭，如果需要查看日志则打开开关（true），建议正式版关闭以避免影响性能
+    debug = false
+    // 默认启动此插件，如果开发者不需要可以禁用（false）git
+    enabled = true
+}
+
+android {
+    signingConfigs {
+        config {
+            keyAlias app_keyAlias
+            keyPassword app_keyPassword
+            storeFile app_storeFile
+            storePassword app_storePassword
+        }
+    }
+    compileSdkVersion build_versions.compileSdk
+    defaultConfig {
+        applicationId "com.dingdian.order"
+        minSdkVersion build_versions.minSdk
+        targetSdkVersion build_versions.targetSdk
+        versionName app_version.versionName
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName(), AROUTER_GENERATE_DOC: "enable"]
+            }
+        }
+        signingConfig signingConfigs.config
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.config
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+    dexOptions {
+        javaMaxHeapSize "2g"
+    }
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+    productFlavors {
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                def fileName = "fundrop${visionName(defaultConfig.versionName)}signed_${releaseTime()}.apk"
+                outputFileName = fileName
+            }
+        }
+    }
+}
+
+kapt {
+    arguments {
+        arg("moduleName", project.getName())
+        System.out.println(project.getName())
+    }
+}
+
+greendao {
+    schemaVersion 2//数据库版本号
+    daoPackage 'com.dingdian.order.db.greendao'//设置DaoMaster、DaoSession、Dao包名
+    targetGenDir 'src/main/java'//设置DaoMaster、DaoSession、Dao目录
+    //targetGenDirTest：设置生成单元测试目录
+    //generateTests：设置自动生成单元测试用例
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //test
+    implementation deps.test.junit
+    implementation deps.test.runner
+    implementation deps.test.espresso
+    //kotlin
+    implementation deps.kotlin_jre7
+    //support
+    implementation deps.support.v4
+    implementation deps.support.design
+    implementation deps.support.appcompat
+    implementation deps.support.recyclerview
+    implementation deps.support.cardview
+    implementation deps.support.constraintlayout
+    //lifecycle
+    implementation deps.lifecycle.runtime
+    implementation deps.lifecycle.extensions
+    implementation deps.lifecycle.common
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    kapt deps.lifecycle.compiler
+    //dagger
+    implementation deps.dagger.dagger
+    implementation deps.dagger.android
+    implementation deps.dagger.android_support
+    kapt deps.dagger.android_processor
+    kapt deps.dagger.compiler
+    //retrofit
+    implementation deps.retrofit.retrofit
+    implementation deps.retrofit.gson
+    implementation deps.retrofit.converter_gson
+    implementation deps.rxjava.rxandroid
+    implementation deps.rxjava.rxjava2
+    implementation deps.rxjava.rxbinding
+    implementation deps.rxjava.rxlifecycle
+    implementation deps.eventbus
+    implementation deps.kprogress
+    //glide
+    implementation deps.glide.glide
+    implementation deps.glide.glide_okhttp3
+    kapt deps.glide.compiler
+    //luban
+    implementation deps.luban
+    //banner
+    implementation deps.banner
+    //web
+    implementation deps.agentweb
+    //router
+    api deps.arouter.arouter
+    kapt deps.arouter.compiler
+    //leakCanary
+    debugImplementation deps.leakcanary.debug
+    releaseImplementation deps.leakcanary.release
+    //util code
+    implementation deps.utilcode
+    //green dao
+    implementation deps.green_dao
+    implementation deps.sqlcipher
+    //多dex
+    implementation deps.multidex
+    //smartRefreshLayout
+    implementation deps.smartRefreshLayout
+    implementation deps.smartRefreshHeader
+    implementation deps.paging
+    implementation deps.AdapterHelper
+    //immersionbar
+    implementation deps.immersionbar
+    implementation deps.SwipeDelMenuLayout
+    implementation deps.rxpermissions
+    //indicator
+    implementation deps.ViewPagerIndicator
+    //qrcode
+    implementation deps.bga_qrcode_zxing
+    implementation deps.marqueeview
+    implementation deps.background
+    implementation deps.roundedimageview
+    implementation deps.bugly
+    implementation deps.lottie
+    implementation deps.autosize
+    //js bridge
+    implementation 'com.github.wendux:WebViewJavascriptBridge:master-SNAPSHOT'
+    implementation deps.androidPickers
+    implementation deps.MatisseKotlin
+    implementation 'com.dhh:websocket:2.1.2'
+}
+
+// 版本号转换
+def visionName(String visionName) {
+    return "_V" + visionName.replace(".", ".") + "_"
+}
+
+def releaseTime() {
+    return new Date().format("yyyyMMdd", TimeZone.getTimeZone("UTC"))
+}

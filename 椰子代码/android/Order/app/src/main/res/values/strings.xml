@@ -1,0 +1,26 @@
+<resources>
+    <string name="appName">椰子校园商户版</string>
+    <string name="title_order">外卖订单</string>
+    <string name="title_mine">个人中心</string>
+
+    <string name="loading">加载中…</string>
+
+    <string name="result_connect_failed_error">服务器连接失败，请稍后再试。</string>
+    <string name="result_connect_timeout_error">网络连接不可用</string>
+    <string name="result_empty_error">系统繁忙，请稍后再试。</string>
+    <string name="result_network_unavailable_error">网络连接不可用</string>
+
+    <string name="password">密码</string>
+    <string name="notipsagain">不再提示</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="openStatus">营业状态：</string>
+
+    <string-array name="order_tab">
+        <item>待接手</item>
+        <item>已接手</item>
+        <item>已完成</item>
+    </string-array>
+</resources>

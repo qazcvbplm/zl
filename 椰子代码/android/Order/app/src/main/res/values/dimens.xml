@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    //general dimen
+    <dimen name="size8mm">8mm</dimen>
+    <dimen name="size9mm">9mm</dimen>
+    <dimen name="size10mm">10mm</dimen>
+    <dimen name="size11mm">11mm</dimen>
+    <dimen name="size12mm">12mm</dimen>
+    <dimen name="size13mm">13mm</dimen>
+    <dimen name="size14mm">14mm</dimen>
+    <dimen name="size15mm">15mm</dimen>
+    <dimen name="size16mm">16mm</dimen>
+    <dimen name="size17mm">17mm</dimen>
+    <dimen name="size18mm">18mm</dimen>
+    <dimen name="size19mm">19mm</dimen>
+    <dimen name="size20mm">20mm</dimen>
+    <dimen name="size21mm">21mm</dimen>
+    <dimen name="size22mm">22mm</dimen>
+    <dimen name="size23mm">23mm</dimen>
+    <dimen name="size24mm">24mm</dimen>
+    <dimen name="size25mm">25mm</dimen>
+    <dimen name="size26mm">26mm</dimen>
+    <dimen name="size27mm">27mm</dimen>
+    <dimen name="size28mm">28mm</dimen>
+    <dimen name="size29mm">29mm</dimen>
+    <dimen name="size30mm">30mm</dimen>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- default item size -->
+    <dimen name="default_img_size">96dp</dimen>
+    <dimen name="default_ui_height">48dp</dimen>
+    <dimen name="default_button_height">40dp</dimen>
+    <dimen name="default_button_margin_vertical">4dp</dimen>
+    <dimen name="default_button_margin_horizontal">4dp</dimen>
+    <dimen name="default_button_text_size">16dp</dimen>
+
+    <dimen name="default_icon_size">32dp</dimen>
+    <dimen name="default_icon_margin">8dp</dimen>
+
+    <dimen name="default_ui_margin_very_small">2dp</dimen>
+    <dimen name="default_ui_margin_small">4dp</dimen>
+    <dimen name="default_ui_margin">8dp</dimen>
+    <dimen name="default_ui_margin_medium">12dp</dimen>
+    <dimen name="default_ui_margin_large">16dp</dimen>
+    <dimen name="default_ui_margin_huge">32dp</dimen>
+
+    <dimen name="text_size_micro">12sp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_medium">18sp</dimen>
+    <dimen name="text_size_large">22sp</dimen>
+    <dimen name="text_size_huge">26sp</dimen>
+</resources>

@@ -1,0 +1,24 @@
+# 基于最新版的NODE容器创建
+FROM node:latest
+MAINTAINER waterchestnut "tzh"
+
+# 复制容器的执行脚本
+COPY ./helpserver /helpserver
+COPY ./helpclient /helpclient
+RUN chmod 755 /helpserver
+RUN chmod 755 /helpclient
+WORKDIR /helpclient
+RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
+RUN cnpm install
+RUN npm run build
+# 安装pm2的插件webshell，方便在容器外直接管理node和pm2
+RUN cnpm install -g pm2@latest
+WORKDIR /helpclient/dist
+RUN mv index.html ./dist/
+RUN mv dist /helpserver/public/
+WORKDIR /helpserver
+RUN cnpm install
+
+
+# 容器的执行命令
+CMD ["npm","start"]
