@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="viewModel" type="com.dingdian.order.ui.goods.GoodsViewModel"></variable>
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.goods.GoodsActivity">
+
+        <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_marginTop="20mm"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="match_parent"
+                app:navigationIcon="@drawable/ic_back_black"
+                android:layout_height="44mm">
+
+            <TextView
+                    android:textColor="@color/defaultBlack"
+                    android:text="商品管理"
+                    android:textSize="14mm"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+        </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+                android:layout_marginTop="@dimen/size16mm"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar"
+                android:id="@+id/topLayout"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_width="0mm"
+                android:layout_height="44mm">
+
+            <TextView
+                    android:onClick="@{viewModel::onConstellationPicker}"
+                    android:gravity="center"
+                    android:textColor="@color/defaultBlack"
+                    android:text="选择分类："
+                    android:textSize="14mm"
+                    android:layout_gravity="right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"/>
+
+            <TextView
+                    android:paddingRight="8mm"
+                    android:drawableRight="@drawable/ic_arrow_down"
+                    android:text="@{viewModel.typeName}"
+                    android:gravity="center"
+                    android:onClick="@{viewModel::onConstellationPicker}"
+                    app:bl_stroke_color="@color/darkgray"
+                    app:bl_shape="rectangle"
+                    app:bl_stroke_width="1mm"
+                    app:bl_corners_radius="4mm"
+                    android:layout_width="200mm"
+                    android:layout_height="32mm"/>
+
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/topLayout"
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0mm">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <android.support.design.widget.FloatingActionButton
+                android:onClick="@{viewModel::addGoods}"
+                app:backgroundTint="@color/colorPrimary"
+                android:src="@drawable/ic_add"
+                android:layout_marginBottom="@dimen/size24mm"
+                android:layout_marginRight="@dimen/size24mm"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable name="model" type="com.dingdian.order.bean.GoodsBean"></variable>
+        <import type="com.dingdian.order.utils.NumberFormatUtil"></import>
+    </data>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        <android.support.v7.widget.CardView
+                android:layout_margin="16mm"
+                app:cardCornerRadius="8mm"
+                android:elevation="2mm"
+                android:layout_width="343mm"
+                android:layout_height="wrap_content">
+            <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                        app:riv_corner_radius="4mm"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginBottom="@dimen/size16mm"
+                        android:layout_marginTop="@dimen/size16mm"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        android:layout_marginLeft="@dimen/size16mm"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:id="@+id/goodImage"
+                        imageUrl="@{model.productImage}"
+                        android:src="@drawable/ic_goods_default"
+                        android:layout_width="72mm"
+                        android:layout_height="64mm"/>
+
+                <TextView
+                        android:text="@{model.productName}"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size14mm"
+                        android:layout_marginLeft="@dimen/size16mm"
+                        android:layout_marginTop="@dimen/size16mm"
+                        app:layout_constraintLeft_toRightOf="@id/goodImage"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:id="@+id/goodsName"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:maxWidth="150mm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <TextView
+                        android:text="@{`月售`+model.sale}"
+                        android:textColor="@color/darkgray"
+                        android:textSize="@dimen/size13mm"
+                        android:layout_marginTop="4mm"
+                        android:layout_marginLeft="@dimen/size16mm"
+                        app:layout_constraintLeft_toRightOf="@id/goodImage"
+                        app:layout_constraintTop_toBottomOf="@id/goodsName"
+                        android:id="@+id/saleNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                        android:layout_marginTop="4mm"
+                        app:layout_constraintTop_toBottomOf="@id/saleNum"
+                        app:layout_constraintLeft_toRightOf="@id/goodImage"
+                        android:layout_marginLeft="@dimen/size16mm"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                            android:text="@{`￥`+ NumberFormatUtil.format(model.discountPrice())}"
+                            android:textColor="@color/indianred"
+                            android:textSize="@dimen/size13mm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    <TextView
+                            android:id="@+id/originPrice"
+                            android:layout_marginLeft="8mm"
+                            android:text="@{`￥`+ NumberFormatUtil.format(model.originPrice())}"
+                            android:textColor="@color/darkgray"
+                            android:textSize="@dimen/size11mm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+                <TextView
+                        app:bl_corners_radius="4mm"
+                        app:bl_selected_drawable="#336795EC"
+                        app:bl_unSelected_drawable="#33CD5C5C"
+                        app:bl_shape="rectangle"
+                        android:gravity="center"
+                        android:textColor="@{model.show()?@color/colorPrimary:@color/indianred}"
+                        android:layout_marginRight="@dimen/size16mm"
+                        android:layout_marginTop="@dimen/size16mm"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        android:text="@{model.show()?`上架中`:`下架中`}"
+                        android:id="@+id/status"
+                        android:layout_width="70mm"
+                        android:layout_height="24mm"/>
+
+                <LinearLayout
+                        android:layout_marginTop="4mm"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@id/goodImage"
+                        android:layout_marginLeft="@dimen/size16mm"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                            android:id="@+id/edit"
+                            android:gravity="center"
+                            android:text="编辑"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/size13mm"
+                            android:layout_width="50mm"
+                            android:layout_height="@dimen/size24mm"/>
+
+                    <TextView
+                            android:id="@+id/delete"
+                            android:gravity="center"
+                            android:text="删除"
+                            android:textColor="@color/indianred"
+                            android:textSize="@dimen/size11mm"
+                            android:layout_width="50mm"
+                            android:layout_height="@dimen/size24mm"/>
+
+                </LinearLayout>
+
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+</layout>

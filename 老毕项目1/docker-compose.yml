@@ -11,6 +11,17 @@ services:
       - mysql
     privileged: true
     network_mode: "host"
+  node2:
+    build:
+      context: .
+      dockerfile: pm3
+    restart: "always"
+    ports:
+      - "3337:3337"
+    depends_on:
+      - mysql
+    privileged: true
+    network_mode: "host"
   mysql:
     restart: "always"
     image: mysql
