@@ -2,6 +2,9 @@
 # Date: 2019-07-23 14:26:03
 # Generator: MySQL-Front 6.1  (Build 1.26)
 
+create database `ops` default character set utf8 collate utf8_general_ci;
+
+use ops;
 
 #
 # Structure for table "address"

@@ -7,7 +7,7 @@ services:
       - ./conf/nginx.conf:/etc/nginx/nginx.conf
       - ./conf/1.crt:/etc/nginx/1.crt
       - ./conf/2.key:/etc/nginx/2.key
-      - /home/yzxy:/etc/nginx/yzxy
+      - ./conf/yzxy:/etc/nginx/yzxy
       - ./shopbarcode:/etc/nginx/shopbarcode/shopbarcode
     ports:
       - "80:80"
@@ -17,6 +17,7 @@ services:
         ipv4_address: 192.168.0.2
   web:
     image: openjdk
+    restart: "always"
     depends_on:
       - mysql
       - redis
@@ -24,7 +25,6 @@ services:
     volumes:
       - ./conf/com-c2.jar:/com.jar
       - ./cert:/home/cert
-      - ./conf/config:/config
       - ./logs:/logs
       - ./shopbarcode:/home/barcode
     command: nohup java -jar -Duser.timezone=Asia/Shanghai  com.jar
@@ -39,9 +39,7 @@ services:
     command:
       --default-authentication-plugin=mysql_native_password
     environment:
-      MYSQL_ROOT_PASSWORD: "123123"
-      MYSQL_USER: "test"
-      MYSQL_PASS: "chuyinkeji"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     volumes:
       - "./mysql_data:/var/lib/mysql"
     ports:
