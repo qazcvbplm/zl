@@ -7,77 +7,19 @@ services:
       - ./conf/nginx.conf:/etc/nginx/nginx.conf
       - ./conf/1.crt:/etc/nginx/1.crt
       - ./conf/2.key:/etc/nginx/2.key
-      - ./conf/yzxy:/etc/nginx/yzxy
+      - /home/yzxy:/etc/nginx/yzxy
       - ./shopbarcode:/etc/nginx/shopbarcode/shopbarcode
     ports:
       - "80:80"
       - "443:443"
-    networks:
-      extnetwork:
-        ipv4_address: 192.168.0.2
-  web:
-    image: openjdk
-    depends_on:
-      - mysql
-      - redis
-      - rabbitmq
-    volumes:
-      - ./conf/com-c2.jar:/com.jar
-      - ./cert:/home/cert
-      - ./logs:/logs
-      - ./shopbarcode:/home/barcode
-    command: nohup java -jar -Duser.timezone=Asia/Shanghai  com.jar
-    ports:
-      - "11000:11000"
-    networks:
-      extnetwork:
-        ipv4_address: 192.168.0.3
-  mysql:
-    restart: "always"
-    image: mysql:5.7.18
-    environment:
-      MYSQL_ROOT_PASSWORD: "123123"
-    volumes:
-      - "./mysql_data:/var/lib/mysql"
-    ports:
-      - "3306:3306"
-    networks:
-      extnetwork:
-        ipv4_address: 192.168.0.4
+    network_mode: "host"
   redis:
     image: redis
     volumes:
       - "./redis_data:/data"
-    command: redis-server --requirepass 123123
+    command: redis-server --requirepass tzh1234567890
     ports:
       - "6379:6379"
-    networks:
-      extnetwork:
-        ipv4_address: 192.168.0.5
-  rabbitmq:
-    image: rabbitmq:management-alpine
-    environment:
-      - RABBITMQ_DEFAULT_USER=root
-      - RABBITMQ_DEFAULT_PASS=123123
-    restart: always
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "200k"
-        max-file: "10"
-    volumes:
-      - "./rabbitmq_data:/var/lib/rabbitmq"
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    networks:
-      extnetwork:
-        ipv4_address: 192.168.0.6
+    network_mode: "host"
 
-networks:
-  extnetwork:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 192.168.0.0/16
-          gateway: 192.168.0.1
+
